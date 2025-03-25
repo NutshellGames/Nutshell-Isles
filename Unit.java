@@ -75,7 +75,7 @@ public class Unit {
         setHealth(this.Health - Damage);
         
         if (display) {
-            System.out.println(this.Name + " took " + Damage + " damage!");
+            System.out.println(Format.formatText(this.Name + " took " + Damage + " damage!", "red"));
         }
     }
     
@@ -83,7 +83,7 @@ public class Unit {
         this.Health += Healing;
         
         if (display) {
-            System.out.println(this.Name + " healed " + Healing + " health!");
+            System.out.println(Format.formatText(this.Name + " healed " + Healing + " health!", "green"));
         }
     }
     
@@ -118,12 +118,12 @@ public class Unit {
             System.out.println(this.Name + " has leveled up to level " + Level + "!\n");
             
             System.out.println("Level " + oldLevel + " > " + this.Level);
-            System.out.println("HP " + oldMaxHealth + " > " + this.MaxHealth + " (+" + (this.MaxHealth - oldMaxHealth) + ")");
-            System.out.println("PATK " + oldPAttack + " > " + this.PhysicalDamage + " (+" + (this.PhysicalDamage - oldPAttack) + ")");
-            System.out.println("PDEF " + oldPDefence + " > " + this.PhysicalDefence + " (+" + (this.PhysicalDefence - oldPDefence) + ")");
-            System.out.println("MATK " + oldMAttack + " > " + this.MagicDamage + " (+" + (this.MagicDamage - oldMAttack) + ")");
-            System.out.println("MDEF " + oldMDefence + " > " + this.MagicDefence + " (+" + (this.MagicDefence - oldMDefence) + ")");
-            System.out.println("SPD " + oldSpeed + " > " + this.Speed + " (+" + (this.Speed - oldSpeed) + ")");
+            System.out.println("HP " + oldMaxHealth + " > " + this.MaxHealth + Format.formatText(" (+" + (this.MaxHealth - oldMaxHealth) + ")", "green"));
+            System.out.println("PATK " + oldPAttack + " > " + this.PhysicalDamage + Format.formatText(" (+" + (this.PhysicalDamage - oldPAttack) + ")", "green"));
+            System.out.println("PDEF " + oldPDefence + " > " + this.PhysicalDefence + Format.formatText(" (+" + (this.PhysicalDefence - oldPDefence) + ")", "green"));
+            System.out.println("MATK " + oldMAttack + " > " + this.MagicDamage + Format.formatText(" (+" + (this.MagicDamage - oldMAttack) + ")", "green"));
+            System.out.println("MDEF " + oldMDefence + " > " + this.MagicDefence + Format.formatText(" (+" + (this.MagicDefence - oldMDefence) + ")", "green"));
+            System.out.println("SPD " + oldSpeed + " > " + this.Speed + Format.formatText(" (+" + (this.Speed - oldSpeed) + ")", "green"));
             
             System.out.println("\nExp needed for next level up: " + this.Exp + "/" + this.MaxExp);
         } else if (oldLevel > Level) {
@@ -131,7 +131,7 @@ public class Unit {
                 delevel(false);
             }
             
-            System.out.println(this.Name + " has dropped to level " + this.Level + "!\n");
+            System.out.println(Format.formatText(this.Name + " has dropped to level " + this.Level + "!\n", "red"));
         }
     }
     
@@ -175,13 +175,6 @@ public class Unit {
     
     public void delevel(Boolean display) {
         if (display == null) {display = true;};
-        
-        int oldMaxHealth = this.MaxHealth;
-        int oldPAttack = this.PhysicalDamage;
-        int oldPDefence = this.PhysicalDefence;
-        int oldMAttack = this.MagicDamage;
-        int oldMDefence = this.MagicDefence;
-        int oldSpeed = this.Speed;
         
         this.MaxHealth -= 2;
         this.Health -= 2;
@@ -332,7 +325,7 @@ public class Unit {
     public String toString() {
         String finalString = "";
         
-        finalString = this.Name + " Lvl " + this.Level + " (" + this.Exp + "/" + this.MaxExp + ")\nHP: " + this.Health + "/" + this.MaxHealth + "\n\nSkills:\n";
+        finalString = this.Name + " Lvl " + this.Level + " (" + this.Exp + "/" + this.MaxExp + ")\nHP: " + Format.formatText(this.Health + "/" + this.MaxHealth, "green") + "\n\nSkills:\n";
         
         for (int i = 0; i < 4; i++) {
             if (this.Skills.size() > i) {
@@ -345,7 +338,7 @@ public class Unit {
         finalString += "\n";
         
         if (this.Item != null) {
-            finalString += "Held Item: " + this.Item.getName();
+            finalString += "Held Item: " + this.Item.getName(true);
         } else {
             finalString += "Held Item: N/A";
         }

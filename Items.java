@@ -39,35 +39,73 @@ public class Items {
         6 - All
         7 - Random
     */
+
+    private int Rarity;
+    /*
+        1 - Nut
+        2 - Nut+
+        3 - Nutrutious
+        4 - Nutty
+        5 - Nuttastic
+        6 - Mythnutical
+        7 - NUT LORD
+    */
     
     private Unit Holder;
     
     private String Description;
     
-    public Items(String Name, int ItemType, int Effect, int BoostType, double Modifier, int Targets, Unit Holder, String Description) {
+    public Items(String Name, int ItemType, int Effect, int BoostType, double Modifier, int Targets, int Rarity, Unit Holder, String Description) {
         this.Name = Name;
         this.ItemType = ItemType;
         this.Effect = Effect;
         this.BoostType = BoostType;
         this.Modifier = Modifier;
         this.Targets = Targets;
+        this.Rarity = Rarity;
         this.Holder = Holder;
         this.Description = Description;
     }
     
-    public Items(String Name, int ItemType, int Effect, int BoostType, double Modifier, int Targets, String Description) {
+    public Items(String Name, int ItemType, int Effect, int BoostType, double Modifier, int Targets, int Rarity, String Description) {
         this.Name = Name;
         this.ItemType = ItemType;
         this.Effect = Effect;
         this.BoostType = BoostType;
         this.Modifier = Modifier;
         this.Targets = Targets;
+        this.Rarity = Rarity;
         this.Holder = null;
         this.Description = Description;
     }
     
+    public String getName(boolean includeRarity) {
+        if (includeRarity) {
+            switch (this.Rarity) {
+                case 1:
+                    return Format.formatText(this.Name, "gray");
+                case 2:
+                    return Format.formatText(this.Name, "green");
+                case 3:
+                    return Format.formatText(this.Name, "cyan");
+                case 4:
+                    return Format.formatText(this.Name, "brown");
+                case 5:
+                    return Format.formatText(this.Name, "orange");
+                case 6:
+                    return Format.formatText(this.Name, "magenta");
+                case 7:
+                    return Format.formatText(this.Name, "red");
+                default:
+                    return this.Name;
+            }
+        } else {
+            return this.Name;
+        }
+    }
+
     public String getName() {
-        return this.Name;
+        return this.getName(false);
     }
     
     public void setName(String Name) {
@@ -88,6 +126,18 @@ public class Items {
     
     public int getTargets() {
         return this.Targets;
+    }
+
+    public int getBoostType() {
+        return this.BoostType;
+    }
+
+    public String getDescription() {
+        return this.Description;
+    }
+
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
     
     public Unit getHolder() {
@@ -122,6 +172,36 @@ public class Items {
     public String toString() {
         String finalstring = "";
         
+        finalstring += this.Name;
+
+        switch (this.Rarity) {
+            case 1:
+                finalstring += " (" + Format.formatText("Nut", "gray") + ")\n";
+                break;
+            case 2:
+                finalstring += " (" + Format.formatText("Nut+", "green") + ")\n";
+                break;
+            case 3:
+                finalstring += " (" + Format.formatText("Nutrutious", "cyan") + ")\n";
+                break;
+            case 4:
+                finalstring += " (" + Format.formatText("Nutty", "brown") + ")\n";
+                break;
+            case 5:
+                finalstring += " (" + Format.formatText("Nuttastic", "orange") + ")\n";
+                break;
+            case 6:
+                finalstring += " (" + Format.formatText("Mythnutical", "magenta") + ")\n";
+                break;
+            case 7:
+                finalstring += " (" + Format.formatText("NUT LORD", "red") + ")\n";
+                break;
+            default:
+                break;
+        }
+
+        finalstring += " - " + this.Description + "\n";
+
         return finalstring;
     }
 }
