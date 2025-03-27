@@ -135,13 +135,9 @@ public class Format {
         return finaltext;
     }
 
-    static String formatText(String text, String color) {
-        return formatText(text, color, false);
-    }
+    static String formatText(String text, String color) {return formatText(text, color, false);}
 
-    static String formatText(String text, boolean underlined) {
-        return formatText(text, "white", underlined);
-    }
+    static String formatText(String text, boolean underlined) {return formatText(text, "white", underlined);}
 
     // typeSpecialCharacterMethods
     static String typeSpecialCharacter(String character, String color, boolean underlined, int count, boolean space) {
@@ -165,17 +161,13 @@ public class Format {
 
     static String typeSpecialCharacter(String character, String color, int count, boolean space) {return typeSpecialCharacter(character, color, false, count, space);}
 
-    static String typeSpecialCharacter(String character, String color, boolean underlined, boolean space) {return typeSpecialCharacter(character, color, underlined, 1, space);}
+    static String typeSpecialCharacter(String character, String color, boolean underlined) {return typeSpecialCharacter(character, color, underlined, 1, false);}
 
     static String typeSpecialCharacter(String character, String color, boolean underlined, int count) {return typeSpecialCharacter(character, color, underlined, count, false);}
-
-    static String typeSpecialCharacter(String character, String color, boolean space) {return typeSpecialCharacter(character, color, false, 1, space);}
 
     static String typeSpecialCharacter(String character, String color) {return typeSpecialCharacter(character, color, false, 1, false);}
 
     static String typeSpecialCharacter(String character, boolean underlined, int count, boolean space) {return typeSpecialCharacter(character, "white", underlined, count, space);}
-
-    static String typeSpecialCharacter(String character, boolean underlined, boolean space) {return typeSpecialCharacter(character, "white", underlined, 1, space);}
 
     static String typeSpecialCharacter(String character) {return typeSpecialCharacter(character, "white", false, 1, false);}
 

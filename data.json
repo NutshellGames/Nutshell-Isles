@@ -1,0 +1,89 @@
+{
+  "InnMembers": [],
+  "Party": [
+    {
+      "Health": 100,
+      "MaxHealth": 100,
+      "Level": 1,
+      "Exp": 0,
+      "MaxExp": 100,
+      "Name": "Test Unit",
+      "PhysicalDamage": 10,
+      "MagicDamage": 10,
+      "PhysicalDefence": 10,
+      "MagicDefence": 10,
+      "Speed": 5,
+      "Skills": [
+        {
+          "Name": "Test Attack",
+          "SkillType": 1,
+          "Physical": true,
+          "Power": 20,
+          "Accuracy": 100,
+          "Speed": 10,
+          "Targets": 1
+        },
+        {
+          "Name": "Test Heal",
+          "SkillType": 4,
+          "Physical": false,
+          "Power": 20,
+          "Accuracy": 100,
+          "Speed": 10,
+          "Targets": 3
+        },
+        {
+          "Name": "Test Splash Attack",
+          "SkillType": 1,
+          "Physical": false,
+          "Power": 15,
+          "Accuracy": 100,
+          "Speed": 7,
+          "Targets": 2
+        }
+      ],
+      "Item": {
+        "Name": "Small Exp Boost",
+        "ItemType": 1,
+        "Effect": 8,
+        "BoostType": 2,
+        "Modifier": 1.5,
+        "Targets": 1,
+        "Rarity": 5,
+        "Description": "Increases Holder\u0027s Exp gained by 50%"
+      }
+    }
+  ],
+  "Items": [
+    {
+      "Name": "Small Exp Boost",
+      "ItemType": 1,
+      "Effect": 8,
+      "BoostType": 2,
+      "Modifier": 1.5,
+      "Targets": 1,
+      "Rarity": 5,
+      "Description": "Increases Holder\u0027s Exp gained by 50%"
+    },
+    {
+      "Name": "Medium Exp Boost",
+      "ItemType": 1,
+      "Effect": 8,
+      "BoostType": 2,
+      "Modifier": 2.0,
+      "Targets": 1,
+      "Rarity": 6,
+      "Description": "Increases Holder\u0027s Exp gained by 100%"
+    },
+    {
+      "Name": "Large Exp Boost",
+      "ItemType": 1,
+      "Effect": 8,
+      "BoostType": 2,
+      "Modifier": 3.0,
+      "Targets": 1,
+      "Rarity": 7,
+      "Description": "Increases Holder\u0027s Exp gained by 200%"
+    }
+  ]
+}

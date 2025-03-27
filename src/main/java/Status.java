@@ -32,6 +32,8 @@ public class Status {
 
     private String description;
 
+    public Status() {}
+
     public Status(String name, String color, int statusType, int duration, double modifier, int modifierType, int level, int maxLevel, String description) {
         this.name = name;
         this.color = color;

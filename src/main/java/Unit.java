@@ -17,6 +17,8 @@ public class Unit {
     private Items Item;
     
     // Constructors
+    public Unit () {}
+
     public Unit(String Name, int Health, int MaxHealth, int Level, int PhysicalDamage, int MagicDamage, int PhysicalDefence, int MagicDefence, int Speed, ArrayList<Skill> Skills, Items Item) {
         this.Name = Name;
         this.Health = Health;
@@ -320,6 +322,20 @@ public class Unit {
     
     public void setItem(Items Item) {
         this.Item = Item;
+    }
+
+    public void equipItem(Items Item) {
+        unequipItem();
+        this.Item = Item;
+        Data.removeItem(Item);
+    }
+
+    public void unequipItem() {
+        if (this.Item != null) {
+            Data.addItem(this.Item);
+        }
+
+        this.Item = null;
     }
     
     public String toString() {

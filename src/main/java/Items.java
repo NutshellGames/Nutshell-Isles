@@ -51,22 +51,10 @@ public class Items {
         7 - NUT LORD
     */
     
-    private Unit Holder;
-    
     private String Description;
     
-    public Items(String Name, int ItemType, int Effect, int BoostType, double Modifier, int Targets, int Rarity, Unit Holder, String Description) {
-        this.Name = Name;
-        this.ItemType = ItemType;
-        this.Effect = Effect;
-        this.BoostType = BoostType;
-        this.Modifier = Modifier;
-        this.Targets = Targets;
-        this.Rarity = Rarity;
-        this.Holder = Holder;
-        this.Description = Description;
-    }
-    
+    public Items() {}
+
     public Items(String Name, int ItemType, int Effect, int BoostType, double Modifier, int Targets, int Rarity, String Description) {
         this.Name = Name;
         this.ItemType = ItemType;
@@ -75,7 +63,6 @@ public class Items {
         this.Modifier = Modifier;
         this.Targets = Targets;
         this.Rarity = Rarity;
-        this.Holder = null;
         this.Description = Description;
     }
     
@@ -93,7 +80,7 @@ public class Items {
                 case 5:
                     return Format.formatText(this.Name, "orange");
                 case 6:
-                    return Format.formatText(this.Name, "magenta");
+                    return Format.formatText(this.Name, "pink");
                 case 7:
                     return Format.formatText(this.Name, "red");
                 default:
@@ -140,35 +127,6 @@ public class Items {
         this.Description = Description;
     }
     
-    public Unit getHolder() {
-        return this.Holder;
-    }
-    
-    public void setHolder(Unit Holder) {
-        this.Holder = Holder;
-    }
-    
-    public void equip(Unit unit) {
-        if (unit.getItem() != null) {
-            Items prevItem = unit.getItem();
-            prevItem.unequip();
-        }
-        
-        this.Holder = unit;
-        unit.setItem(this);
-    }
-    
-    public void unequip() {
-        Items oldItem = this.Holder.getItem();
-        
-        Unit holder = oldItem.getHolder();
-        
-        holder.setItem(null);
-        oldItem.setHolder(null);
-        
-        Data.addItem(oldItem);
-    }
-    
     public String toString() {
         String finalstring = "";
         
@@ -182,7 +140,7 @@ public class Items {
                 finalstring += " (" + Format.formatText("Nut+", "green") + ")\n";
                 break;
             case 3:
-                finalstring += " (" + Format.formatText("Nutrutious", "cyan") + ")\n";
+                finalstring += " (" + Format.formatText("Nut-trutious", "cyan") + ")\n";
                 break;
             case 4:
                 finalstring += " (" + Format.formatText("Nutty", "brown") + ")\n";
@@ -191,7 +149,7 @@ public class Items {
                 finalstring += " (" + Format.formatText("Nuttastic", "orange") + ")\n";
                 break;
             case 6:
-                finalstring += " (" + Format.formatText("Mythnutical", "magenta") + ")\n";
+                finalstring += " (" + Format.formatText("Mythnutical", "pink") + ")\n";
                 break;
             case 7:
                 finalstring += " (" + Format.formatText("NUT LORD", "red") + ")\n";

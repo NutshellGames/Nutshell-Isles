@@ -5,9 +5,16 @@ public class Utils {
     private static Scanner input = new Scanner(System.in);
     
     // This method takes an input but ignores it, used to slow down gameplay
-    public static void blankInput() {
+    public static void blankInput(boolean clear) {
         String blank = input.nextLine();
+
+        if (clear) {
+            System.out.println(blank);
+            clearTerminal();
+        }
     }
+
+    public static void blankInput() {blankInput(false);}
     
     // This method clears the terminal by printing many blank lines
     public static void clearTerminal() {
@@ -72,5 +79,19 @@ public class Utils {
             number -= 1;
         }
         return roman;
+    }
+
+    /* 
+       This method pauses the program for a specified number of seconds
+       It takes a double to allow for fractional seconds
+       (e.g. 0.5 for half a second)
+    */
+    static void pause(double seconds) {
+        try {
+            double time = seconds * 1000;
+            Thread.sleep((long) time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
