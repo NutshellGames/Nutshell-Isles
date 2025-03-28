@@ -3,33 +3,31 @@ public class Main
 	public static void main(String[] args) {
 		Format.printLogo("brown");
 
+		Unit unit = Data.createPremadeUnit(0);
+		Status burn = Data.createPremadeStatus(4);
+
+		System.out.println(burn);
+
+		unit.addStatus(burn);
+		System.out.println(unit);
+
+		unit.tickAllStatuses();
+		System.out.println(burn);
+
 		Utils.blankInput();
-		
-		Unit testDummy = Data.createPremadeUnit(0);
-		Items SmallExpBoost = Data.createPremadeItem(0);
-		Items MediumExpBoost = Data.createPremadeItem(1);
-		Items LargeExpBoost = Data.createPremadeItem(2);
 
-		testDummy.equipItem(SmallExpBoost);
+		unit.tickAllStatuses();
+		System.out.println(burn);
 
-		Data.addToParty(testDummy);
-		Data.addItem(SmallExpBoost);
-		Data.addItem(MediumExpBoost);
-		Data.addItem(LargeExpBoost);
+		Utils.blankInput();
 
-		for (int i = 0; i < 11; i++) {
-		    Data.saveData("file " + i);
-			Utils.pause(1);
-		}
-		
+		unit.tickAllStatuses();
+		System.out.println(burn);
 
-		for (int i = 0; i < Data.getParty().size(); i++) {
-		    System.out.println(Data.getParty().get(i));
-		}
-		System.out.println("\n\n");
-		
-		for (int i = 0; i < Data.getItems().size(); i++) {
-		    System.out.println(Data.getItems().get(i));
-		}
+		Utils.blankInput();
+
+		System.out.println(unit);
+
+		Utils.blankInput();
 	}
 }

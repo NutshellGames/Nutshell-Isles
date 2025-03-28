@@ -32,6 +32,17 @@ public class Format {
     private static final String MINT = "\u001B[38;5;121m";
     private static final String TURQUOISE = "\u001B[38;5;80m";
     private static final String MAROON = "\u001B[38;5;52m";
+    private static final String LIGHT_GRAY = "\u001B[38;5;250m";
+    private static final String DARK_GRAY = "\u001B[38;5;235m";
+    private static final String DARK_BLUE = "\u001B[38;5;17m";
+    private static final String DARK_GREEN = "\u001B[38;5;22m";
+    private static final String DARK_RED = "\u001B[38;5;124m";
+    private static final String DARK_PURPLE = "\u001B[38;5;54m";
+    private static final String DARK_CYAN = "\u001B[38;5;37m";
+    private static final String DARK_YELLOW = "\u001B[38;5;130m";
+    private static final String DARK_ORANGE = "\u001B[38;5;208m";
+    private static final String DARK_PINK = "\u001B[38;5;201m";
+    private static final String IVY = "\u001B[38;5;28m";
 
     // Text Formatting
     private static final String UNDERLINE = "\u001B[4m";
@@ -125,6 +136,39 @@ public class Format {
                 break;
             case ("maroon"):
                 finaltext += MAROON;
+                break;
+            case ("light gray"):
+                finaltext += LIGHT_GRAY;
+                break;
+            case ("dark gray"):
+                finaltext += DARK_GRAY;
+                break;
+            case ("dark blue"):
+                finaltext += DARK_BLUE;
+                break;
+            case ("dark green"):
+                finaltext += DARK_GREEN;
+                break;
+            case ("dark red"):
+                finaltext += DARK_RED;
+                break;
+            case ("dark purple"):
+                finaltext += DARK_PURPLE;
+                break;
+            case ("dark cyan"):
+                finaltext += DARK_CYAN;
+                break;
+            case ("dark yellow"):
+                finaltext += DARK_YELLOW;
+                break;
+            case ("dark orange"):
+                finaltext += DARK_ORANGE;
+                break;
+            case ("dark pink"):
+                finaltext += DARK_PINK;
+                break;
+            case ("ivy"):
+                finaltext += IVY;
                 break;
             default:
                 break;

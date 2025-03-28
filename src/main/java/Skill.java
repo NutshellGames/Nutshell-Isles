@@ -8,6 +8,13 @@ public class Skill {
      * 3 - Status
      * 4 - Healing
      */
+
+    private Status StatusEffect;
+
+    private int StatusChance;
+    // Chance of status effect being applied
+    // 0 - 100
+    // 0 = 0%, 100 = 100%
     
     private boolean Physical;
     // true = physical, false = magical
@@ -27,16 +34,32 @@ public class Skill {
      * 5 - Self
      */
 
-    public Skill () {}
-
-    public Skill(String Name, int SkillType, boolean Physical, int Power, int Accuracy, int Speed, int Targets) {
+    public Skill(String Name, int SkillType, Status StatusEffect, int StatusChance, boolean Physical, int Power, int Accuracy, int Speed, int Targets) {
         this.Name = Name;
         this.SkillType = SkillType;
+        this.StatusEffect = StatusEffect;
+        this.StatusChance = StatusChance;
         this.Physical = Physical;
         this.Power = Power;
         this.Accuracy = Accuracy;
         this.Speed = Speed;
         this.Targets = Targets;
+    }
+
+    public Skill(String Name, int SkillType, boolean Physical, int Power, int Accuracy, int Speed, int Targets) {
+        this.Name = Name;
+        this.SkillType = SkillType;
+        this.StatusEffect = null;
+        this.StatusChance = 0;
+        this.Physical = Physical;
+        this.Power = Power;
+        this.Accuracy = Accuracy;
+        this.Speed = Speed;
+        this.Targets = Targets;
+
+        if (SkillType == 3) {
+            throw new IllegalArgumentException("SkillType 3 requires a StatusEffect.");
+        }
     }
 
     public String getName() {
@@ -45,6 +68,18 @@ public class Skill {
 
     public int getSkillType() {
         return this.SkillType;
+    }
+
+    public Status getStatusEffect() {
+        return this.StatusEffect;
+    }
+
+    public boolean hasStatusEffect() {
+        return this.StatusEffect != null;
+    }
+
+    public int getStatusChance() {
+        return this.StatusChance;
     }
     
     public boolean isPhysical() {

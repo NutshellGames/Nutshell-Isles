@@ -78,7 +78,22 @@ public class Data {
     }
     
     static Status createPremadeStatus(int id) {
-        return null;
+        switch (id) {
+            case 0:
+                return new Status("Scent of Nuts", "brown", 6, 3, 10, 1);
+            case 1:
+                return new Status("Burning Nuts", "red", 6, (int) (Math.random() * 2 + 3), -5, 5);
+            case 2:
+                return new Status("Freezing Nuts", "cyan", 5, (int) (Math.random() * 2 + 1), -50, 5);
+            case 3:
+                return new Status("Poisoned Nuts", "ivy", 6, (int) (Math.random() * 3), -10, 5);
+            case 4:
+                return new Status("Toxic Nuts", "purple", 6, (int) (Math.random() * 2 + 2), -10, 5, 1, 3, true);
+            case 5:
+                return new Status("Shocking Nuts", "yellow", 5, 1, -20, 5);
+            default:
+                return null;
+        }
     }
     
     static Items createPremadeItem(int id) {
@@ -154,7 +169,7 @@ public class Data {
             dataWrapper.Date = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date());
 
             // Add Game Version
-            dataWrapper.Version = "0.1.0";
+            dataWrapper.Version = "0.1.1";
 
             // Serialize each list
             dataWrapper.Party = Party;

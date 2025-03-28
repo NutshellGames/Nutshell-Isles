@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Unit {
     private int Health;
@@ -12,13 +13,11 @@ public class Unit {
     private int PhysicalDefence;
     private int MagicDefence;
     private int Speed;
-    private ArrayList<Status> Statuses;
+    private ArrayList<Status> Statuses = new ArrayList<>();
     private ArrayList<Skill> Skills;
     private Items Item;
     
     // Constructors
-    public Unit () {}
-
     public Unit(String Name, int Health, int MaxHealth, int Level, int PhysicalDamage, int MagicDamage, int PhysicalDefence, int MagicDefence, int Speed, ArrayList<Skill> Skills, Items Item) {
         this.Name = Name;
         this.Health = Health;
@@ -65,29 +64,51 @@ public class Unit {
         return this.Health;
     }
     
-    public void setHealth(int Health) {
+    public void setHealth(int Health, boolean display) {
         this.Health = Health;
+        
+        if (display) {
+            System.out.print(this.Name + "'s health is now ");
+            if (this.Health > this.MaxHealth / 2) {
+                System.out.println(Format.formatText(this.Health + "/" + this.MaxHealth, "green"));
+            } else if (this.Health > this.MaxHealth / 10) {
+                System.out.println(Format.formatText(this.Health + "/" + this.MaxHealth, "yellow"));
+            } else {
+                System.out.println(Format.formatText(this.Health + "/" + this.MaxHealth, "red"));
+            }
+        }
         
         if (this.Health <= 0) {
             System.out.println(this.Name + " has been knocked out!");
         }
     }
+
+    public void setHealth(int Health) {setHealth(Health, true);}
     
     public void takeDamage(int Damage, boolean display) {
-        setHealth(this.Health - Damage);
-        
         if (display) {
             System.out.println(Format.formatText(this.Name + " took " + Damage + " damage!", "red"));
         }
+
+        setHealth(this.Health - Damage);
     }
+
+    public void takeDamage(int Damage) {takeDamage(Damage, true);}
     
-    public void healHealth(int Healing, boolean display) {
-        this.Health += Healing;
-        
+    public void healHealth(int Healing, boolean overheal, boolean display) {
         if (display) {
             System.out.println(Format.formatText(this.Name + " healed " + Healing + " health!", "green"));
         }
+
+        if (this.Health + Healing > this.MaxHealth && !overheal) {
+            setHealth(this.MaxHealth);
+        } else {
+            setHealth(this.Health + Healing);
+        }
     }
+
+    public void healHealth(int Healing, boolean display) {healHealth(Healing, false, display);}
+    public void healHealth(int Healing) {healHealth(Healing, false, true);}
     
     public int getMaxHealth() {
         return this.MaxHealth;
@@ -282,12 +303,39 @@ public class Unit {
         this.Statuses = Statuses;
     }
     
-    public void addStatus(Status Statuses) {
-        this.Statuses.add(Statuses);
+    public void addStatus(Status status) {
+        this.Statuses.add(status);
+
+        System.out.println(this.Name + " has been afflicted with " + status.getName() + "!");
     }
     
-    public void removeStatus(Status Statuses) {
-        this.Statuses.remove(Statuses);
+    public void removeStatus(Status status) {
+        this.Statuses.remove(status);
+
+        System.out.println("The effects of " + Format.formatText(status.getName(), status.getColor()) + " have worn off on " + this.Name + "!");
+    }
+
+    public void tickAllStatuses() {
+        if (!Statuses.isEmpty()) {
+            Iterator<Status> iterator = this.Statuses.iterator();
+            while (iterator.hasNext()) {
+                Status status = iterator.next();
+                status.statusTick(this);
+                if (status.isExpired()) {
+                    System.out.println("The effects of " + Format.formatText(status.getName(), status.getColor()) + " have worn off on " + this.Name + "!");
+                    iterator.remove();
+                }
+            }
+        }
+    }
+
+    public void tickStatus(Status status) {
+        status.statusTick(this);
+        
+        System.out.println(status.isExpired());
+        if (status.isExpired()) {
+            removeStatus(status);
+        }
     }
     
     public void clearStatuses() {
@@ -341,7 +389,17 @@ public class Unit {
     public String toString() {
         String finalString = "";
         
-        finalString = this.Name + " Lvl " + this.Level + " (" + this.Exp + "/" + this.MaxExp + ")\nHP: " + Format.formatText(this.Health + "/" + this.MaxHealth, "green") + "\n\nSkills:\n";
+        finalString = this.Name + " Lvl " + this.Level + " (" + this.Exp + "/" + this.MaxExp + ")\nHP: ";
+
+        if (this.Health > this.MaxHealth / 2) {
+            finalString += Format.formatText(this.Health + "/" + this.MaxHealth, "green");
+        } else if (this.Health > this.MaxHealth / 10) {
+            finalString += Format.formatText(this.Health + "/" + this.MaxHealth, "yellow");
+        } else {
+            finalString += Format.formatText(this.Health + "/" + this.MaxHealth, "red");
+        }
+        
+        finalString += "\n\nSkills:\n";
         
         for (int i = 0; i < 4; i++) {
             if (this.Skills.size() > i) {
