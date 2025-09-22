@@ -81,11 +81,13 @@ public class Utils {
         return roman;
     }
 
-    /* 
-       This method pauses the program for a specified number of seconds
-       It takes a double to allow for fractional seconds
+    /** 
+       Pauses the program for a specified number of seconds.
+       Takes a double to allow for fractional seconds
        (e.g. 0.5 for half a second)
-    */
+       @param seconds - the number of seconds to pause the program
+       @throws InterruptedException if any thread has interrupted the current thread. The interrupted status of the current thread is cleared when this exception is thrown.
+    **/
     static void pause(double seconds) {
         try {
             double time = seconds * 1000;
@@ -93,5 +95,35 @@ public class Utils {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Returns the opposite of the given multiplier 
+     * (e.g. 2.0 -> 0.5, 0.5 -> 2.0)
+     * @param mult - the multiplier to flip
+     * @return double - the flipped multiplier
+     **/
+    static double multiplierFlip(double mult) {
+        if (mult == 0) {
+            return 0;
+        }
+
+        return 1 / mult;
+    }
+}
+
+/**
+ * A simple tuple class to hold two related values together
+ * Example usage: Tuple<String, Integer> myTuple = new Tuple<>("Hello", 5);
+ * @param <t1> - the type of the first value
+ * @param <t2> - the type of the second value
+ **/
+class Tuple<t1, t2> {
+    t1 first;
+    t2 second;
+
+    public Tuple(t1 first, t2 second) {
+        this.first = first;
+        this.second = second;
     }
 }

@@ -9,10 +9,10 @@ public class Skill {
      * 4 - Healing
      */
 
-    private Status StatusEffect;
+    private Status[] StatusEffects;
 
-    private int StatusChance;
-    // Chance of status effect being applied
+    private int[] StatusChances;
+    // Chance of each status effect being applied
     // 0 - 100
     // 0 = 0%, 100 = 100%
     
@@ -32,13 +32,19 @@ public class Skill {
      * 3 - Single Ally
      * 4 - Multiple Allies
      * 5 - Self
+     * 6 - All
+     * 7 - Random Enemy
+     * 8 - Random Ally
+     * 9 - Random Any
+     * 10 - Self and Enemy
+     * 11 - Self and Enemies
      */
 
-    public Skill(String Name, int SkillType, Status StatusEffect, int StatusChance, boolean Physical, int Power, int Accuracy, int Speed, int Targets) {
+    public Skill(String Name, int SkillType, Status[] StatusEffects, int[] StatusChances, boolean Physical, int Power, int Accuracy, int Speed, int Targets) {
         this.Name = Name;
         this.SkillType = SkillType;
-        this.StatusEffect = StatusEffect;
-        this.StatusChance = StatusChance;
+        this.StatusEffects = StatusEffects;
+        this.StatusChances = StatusChances;
         this.Physical = Physical;
         this.Power = Power;
         this.Accuracy = Accuracy;
@@ -49,8 +55,8 @@ public class Skill {
     public Skill(String Name, int SkillType, boolean Physical, int Power, int Accuracy, int Speed, int Targets) {
         this.Name = Name;
         this.SkillType = SkillType;
-        this.StatusEffect = null;
-        this.StatusChance = 0;
+        this.StatusEffects = null;
+        this.StatusChances = null;
         this.Physical = Physical;
         this.Power = Power;
         this.Accuracy = Accuracy;
@@ -70,16 +76,16 @@ public class Skill {
         return this.SkillType;
     }
 
-    public Status getStatusEffect() {
-        return this.StatusEffect;
+    public Status[] getStatusEffects() {
+        return this.StatusEffects;
     }
 
-    public boolean hasStatusEffect() {
-        return this.StatusEffect != null;
+    public boolean hasStatusEffects() {
+        return this.StatusEffects != null;
     }
 
-    public int getStatusChance() {
-        return this.StatusChance;
+    public int[] getStatusChances() {
+        return this.StatusChances;
     }
     
     public boolean isPhysical() {

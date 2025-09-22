@@ -1,3 +1,15 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "cSpell.words": [
+        "Defence",
+        "Halflings",
+        "MATK",
+        "MDEF",
+        "Mults",
+        "Nutella",
+        "PATK",
+        "PDEF",
+        "PMTK",
+        "Reqs"
+    ]
 }

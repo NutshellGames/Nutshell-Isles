@@ -25,6 +25,7 @@ public class Format {
     private static final String PINK = "\u001B[95m";
     private static final String ORANGE = "\u001B[38;5;208m";
     private static final String BROWN = "\u001B[38;5;130m";
+    private static final String TAN = "\u001B[38;5;180m";
     private static final String LIME = "\u001B[38;5;118m";
     private static final String TEAL = "\u001B[38;5;30m";
     private static final String SKY = "\u001B[38;5;39m";

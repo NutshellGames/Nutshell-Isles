@@ -8,6 +8,8 @@ public class Unit {
     private int Exp;
     private int MaxExp;
     private String Name;
+    private Races Race;
+    private Role Job;
     private int PhysicalDamage;
     private int MagicDamage;
     private int PhysicalDefence;
@@ -18,11 +20,13 @@ public class Unit {
     private Items Item;
     
     // Constructors
-    public Unit(String Name, int Health, int MaxHealth, int Level, int PhysicalDamage, int MagicDamage, int PhysicalDefence, int MagicDefence, int Speed, ArrayList<Skill> Skills, Items Item) {
+    public Unit(String Name, int Health, int MaxHealth, int Level, Races Race, Role Job, int PhysicalDamage, int MagicDamage, int PhysicalDefence, int MagicDefence, int Speed, ArrayList<Skill> Skills, Items Item) {
         this.Name = Name;
         this.Health = Health;
         this.MaxHealth = MaxHealth;
         this.Level = Level;
+        this.Race = Race;
+        this.Job = Job;
         this.Exp = 0;
         this.MaxExp = 100 * (int)(Math.pow(Level, 0.9));
         this.PhysicalDamage = PhysicalDamage;
@@ -33,12 +37,14 @@ public class Unit {
         this.Skills = Skills;
         this.Item = Item;
     }
-    
-    public Unit(String Name, int Health, int MaxHealth, int Level, int PhysicalDamage, int MagicDamage, int PhysicalDefence, int MagicDefence, int Speed, ArrayList<Skill> Skills) {
+
+    public Unit(String Name, int Health, int MaxHealth, int Level, Races Race, Role Job, int PhysicalDamage, int MagicDamage, int PhysicalDefence, int MagicDefence, int Speed, ArrayList<Skill> Skills) {
         this.Name = Name;
         this.Health = Health;
         this.MaxHealth = MaxHealth;
         this.Level = Level;
+        this.Race = Race;
+        this.Job = Job;
         this.Exp = 0;
         this.MaxExp = 100 * (int)(Math.pow(Level, 0.9));
         this.PhysicalDamage = PhysicalDamage;
@@ -385,11 +391,20 @@ public class Unit {
 
         this.Item = null;
     }
+
+    // Race Methods
+    public Races getRace() {
+        return Race;
+    }
+
+    public double getRacismMultiplier(Unit other) {
+        return Race.getRacismMultiplier(Race.getIndex(), other.getRace().getIndex());
+    }
     
     public String toString() {
         String finalString = "";
         
-        finalString = this.Name + " Lvl " + this.Level + " (" + this.Exp + "/" + this.MaxExp + ")\nHP: ";
+        finalString = "(" + this.Race.getName() + ") " + this.Name + " Lvl " + this.Level + " (" + this.Exp + "/" + this.MaxExp + ")\n" + this.Job.getLvlPrefix() + " " + this.Job.getName() + "\nHP: ";
 
         if (this.Health > this.MaxHealth / 2) {
             finalString += Format.formatText(this.Health + "/" + this.MaxHealth, "green");
@@ -403,7 +418,7 @@ public class Unit {
         
         for (int i = 0; i < 4; i++) {
             if (this.Skills.size() > i) {
-                finalString += "BlankSkill\n";
+                finalString += this.Skills.get(i).getName() + "\n";
             } else {
                 finalString += "N/A\n";
             }

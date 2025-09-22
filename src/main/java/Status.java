@@ -3,6 +3,10 @@ public class Status {
 
     private String Color;
 
+    private boolean AppliesAtEnd;
+    // true = applies once the effect ends
+    // false = applies at end of turn
+
     private int StatusType;
     /*
      * 1 - Physical Attack
@@ -15,6 +19,8 @@ public class Status {
 
     private int Duration;
     /*
+     * -3 - Permanent UNTIL uses attack
+     * -2 - Permanent UNTIL attacked
      * -1 - Permanent
      * >0 - Duration in turns
      */
@@ -49,9 +55,10 @@ public class Status {
 
     private String Description;
 
-    public Status(String Name, String Color, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel, boolean LevelupEveryTurn, String Description) {
+    public Status(String Name, String Color, boolean AppliesAtEnd, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel, boolean LevelupEveryTurn, String Description) {
         this.Name = Name;
         this.Color = Color;
+        this.AppliesAtEnd = AppliesAtEnd;
         this.StatusType = StatusType;
         this.Duration = Duration;
         this.Modifier = Modifier;
@@ -67,7 +74,7 @@ public class Status {
             this.DynamicDescription = false;
         }
 
-        if (Duration == -1) {
+        if (Duration < 0) {
             IsPermanent = true;
         } else {
             IsPermanent = false;
@@ -83,8 +90,8 @@ public class Status {
         if (StatusType < 1 || StatusType > 6) {
             throw new IllegalArgumentException("StatusType must be between 1 and 6.");
         }
-        if (Duration < -1 || Duration == 0) {
-            throw new IllegalArgumentException("Duration must be -1 or greater than 0.");
+        if (Duration < -3 || Duration == 0) {
+            throw new IllegalArgumentException("Duration must be greater than -3.");
         }
         if (ModifierType < 1 || ModifierType > 5) {
             throw new IllegalArgumentException("ModifierType must be between 1 and 5.");
@@ -100,44 +107,84 @@ public class Status {
         }
     }
 
+    public Status(String Name, boolean AppliesAtEnd, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel, boolean LevelupEveryTurn, String Description) {
+        this(Name, "white", AppliesAtEnd, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, LevelupEveryTurn, Description);
+    }
+
+    public Status(String Name, String Color, boolean AppliesAtEnd, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel, boolean LevelupEveryTurn) {
+        this(Name, Color, AppliesAtEnd, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, LevelupEveryTurn, null);
+    }
+
+    public Status(String Name, boolean AppliesAtEnd, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel, boolean LevelupEveryTurn) {
+        this(Name, "white", AppliesAtEnd, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, LevelupEveryTurn, null);
+    }
+
+    public Status(String Name, boolean AppliesAtEnd, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel, String Description) {
+        this(Name, "white", AppliesAtEnd, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, false, Description);
+    }
+
+    public Status(String Name, String Color, boolean AppliesAtEnd, int StatusType, int Duration, double Modifier, int ModifierType, String Description) {
+        this(Name, Color, AppliesAtEnd, StatusType, Duration, Modifier, ModifierType, 1, 1, false, Description);
+    }
+
+    public Status(String Name, boolean AppliesAtEnd, int StatusType, int Duration, double Modifier, int ModifierType, String Description) {
+        this(Name, "white", AppliesAtEnd, StatusType, Duration, Modifier, ModifierType, 1, 1, false, Description);
+    }
+
+    public Status(String Name, String Color, boolean AppliesAtEnd, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel) {
+        this(Name, Color, AppliesAtEnd, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, false, null);
+    }
+
+    public Status(String Name, boolean AppliesAtEnd, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel) {
+        this(Name, "white", AppliesAtEnd, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, false, null);
+    }
+
+    public Status(String Name, String Color, boolean AppliesAtEnd, int StatusType, int Duration, double Modifier, int ModifierType) {
+        this(Name, Color, AppliesAtEnd, StatusType, Duration, Modifier, ModifierType, 1, 1, false, null);
+    }
+
+    public Status(String Name, boolean AppliesAtEnd, int StatusType, int Duration, double Modifier, int ModifierType) {
+        this(Name, "white", AppliesAtEnd, StatusType, Duration, Modifier, ModifierType, 1, 1, false, null);
+    }
+
     public Status(String Name, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel, boolean LevelupEveryTurn, String Description) {
-        this(Name, "white", StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, LevelupEveryTurn, Description);
+        this(Name, "white", false, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, LevelupEveryTurn, Description);
     }
 
     public Status(String Name, String Color, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel, boolean LevelupEveryTurn) {
-        this(Name, Color, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, LevelupEveryTurn, null);
+        this(Name, Color, false, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, LevelupEveryTurn, null);
     }
 
     public Status(String Name, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel, boolean LevelupEveryTurn) {
-        this(Name, "white", StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, LevelupEveryTurn, null);
+        this(Name, "white", false, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, LevelupEveryTurn, null);
     }
 
     public Status(String Name, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel, String Description) {
-        this(Name, "white", StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, false, Description);
+        this(Name, "white", false, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, false, Description);
     }
 
     public Status(String Name, String Color, int StatusType, int Duration, double Modifier, int ModifierType, String Description) {
-        this(Name, Color, StatusType, Duration, Modifier, ModifierType, 1, 1, false, Description);
+        this(Name, Color, false, StatusType, Duration, Modifier, ModifierType, 1, 1, false, Description);
     }
 
     public Status(String Name, int StatusType, int Duration, double Modifier, int ModifierType, String Description) {
-        this(Name, "white", StatusType, Duration, Modifier, ModifierType, 1, 1, false, Description);
+        this(Name, "white", false, StatusType, Duration, Modifier, ModifierType, 1, 1, false, Description);
     }
 
     public Status(String Name, String Color, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel) {
-        this(Name, Color, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, false, null);
+        this(Name, Color, false, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, false, null);
     }
 
     public Status(String Name, int StatusType, int Duration, double Modifier, int ModifierType, int Level, int MaxLevel) {
-        this(Name, "white", StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, false, null);
+        this(Name, "white", false, StatusType, Duration, Modifier, ModifierType, Level, MaxLevel, false, null);
     }
 
     public Status(String Name, String Color, int StatusType, int Duration, double Modifier, int ModifierType) {
-        this(Name, Color, StatusType, Duration, Modifier, ModifierType, 1, 1, false, null);
+        this(Name, Color, false, StatusType, Duration, Modifier, ModifierType, 1, 1, false, null);
     }
 
     public Status(String Name, int StatusType, int Duration, double Modifier, int ModifierType) {
-        this(Name, "white", StatusType, Duration, Modifier, ModifierType, 1, 1, false, null);
+        this(Name, "white", false, StatusType, Duration, Modifier, ModifierType, 1, 1, false, null);
     }
 
     public String getName() {
@@ -181,6 +228,10 @@ public class Status {
     }
 
     public void statusTick(Unit unit) {
+        if (AppliesAtEnd && Duration > 1) {
+            return;
+        }
+        
         if (StatusType == 6) {
             if (Modifier > 0) {
                 switch (ModifierType) {

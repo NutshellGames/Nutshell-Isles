@@ -58,7 +58,7 @@ public class Data {
     static Unit createPremadeUnit(int id) {
         switch(id) {
             case 0:
-                return new Unit("Test Unit", 100, 100, 1, 10, 10, 10, 10, 5, new ArrayList<Skill>(Arrays.asList(createPremadeSkill(0), createPremadeSkill(1), createPremadeSkill(2))));
+                return new Unit("Lil Timmy", 100, 100, 1, createPremadeRace(8), createPremadeRole(6), 10, 10, 10, 10, 5, new ArrayList<Skill>(Arrays.asList(createPremadeSkill(0), createPremadeSkill(1), createPremadeSkill(2))));
             default:
                 return null;
         }
@@ -104,6 +104,94 @@ public class Data {
                 return new Items("Medium Exp Boost", 1, 8, 2, 2, 1, 6, "Increases Holder's Exp gained by 100%");
             case 2:
                 return new Items("Large Exp Boost", 1, 8, 2, 3, 1, 7, "Increases Holder's Exp gained by 200%");
+            default:
+                return null;
+        }
+    }
+
+    static Races createPremadeRace(int id) {
+        switch(id) {
+            case 0:
+                return new Races("Human", 0);
+            case 1:
+                return new Races("Elf", 1);
+            case 2:
+                return new Races("Dwarf", 2);
+            case 3:
+                return new Races("Orc", 3);
+            case 4:
+                return new Races("Goblin", 4);
+            case 5:
+                return new Races("Undead", 5);
+            case 6:
+                return new Races("Halfling", 6);
+            case 7:
+                return new Races("Gnome", 7);
+            case 8:
+                return new Races("Troll", 8);
+            default:
+                return null;
+        }
+    }
+
+    static Role createPremadeRole(int id) {
+        switch(id) {
+            case 0:
+                return new Role("Drifter", 0);
+            case 1:
+                return new Role("Swordsman", 1);
+            case 2:
+                return new Role("Warrior", 2);
+            case 3:
+                return new Role("Knight", 3);
+            case 4:
+                return new Role("Holy Knight", 4);
+            case 5:
+                return new Role("Barbarian", 5);
+            case 6:
+                return new Role("Savage", 6);
+            case 7:
+                return new Role("Mage", 7);
+            case 8:
+                return new Role("Wizard", 8);
+            case 9:
+                return new Role("Sorcerer", 9);
+            case 10:
+                return new Role("Sorcerer Supreme", 10);
+            case 11:
+                return new Role("Dark Wizard", 11);
+            case 12:
+                return new Role("Necromancer", 12);
+            case 13:
+                return new Role("Bowman", 13);
+            case 14:
+                return new Role("Archer", 14);
+            case 15:
+                return new Role("Ranger", 15);
+            case 16:
+                return new Role("Sniper", 16);
+            case 17:
+                return new Role("Rogue", 17);
+            case 18:
+                return new Role("Assassin", 18);
+            case 19:
+                return new Role("Healer", 19);
+            case 20:
+                return new Role("Cleric", 20);
+            case 21:
+                return new Role("Bishop", 21);
+            case 22:
+                return new Role("Archbishop", 22);
+            case 23:
+                return new Role("Alchemist", 23);
+            case 24:
+                return new Role("Potions Master", 24);
+            case 25:
+                return new Role("Nut of All Trades", 25);
+            case 26:
+                return new Role("Peanut Butter", 26);
+            case 27:
+                return new Role("Nutella Champion", 27);
             default:
                 return null;
         }
